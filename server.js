@@ -9,9 +9,12 @@ const port = process.env.PORT || 3000; // Use Vercel's port or default to 3000
 // Enable CORS for all origins (for development)
 app.use(cors());
 
+// Serve static files (frontend)
+app.use(express.static('public'));
+
 // Root route (optional)
 app.get('/', (req, res) => {
-  res.send('Welcome to the YouTube Analytics Backend! Use /api/search or /api/channel.');
+  res.sendFile(__dirname + '/index.html');
 });
 
 // Proxy endpoint for YouTube search
