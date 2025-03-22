@@ -2,6 +2,7 @@ require('dotenv').config(); // Load environment variables
 const express = require('express');
 const fetch = require('node-fetch').default; // Import node-fetch correctly
 const cors = require('cors'); // Import the cors package
+const path = require('path'); // Import path module
 
 const app = express();
 const port = process.env.PORT || 3000; // Use Vercel's port or default to 3000
@@ -10,11 +11,11 @@ const port = process.env.PORT || 3000; // Use Vercel's port or default to 3000
 app.use(cors());
 
 // Serve static files (frontend)
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Root route (optional)
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Proxy endpoint for YouTube search
