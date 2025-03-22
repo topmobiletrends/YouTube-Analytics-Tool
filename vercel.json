@@ -6,15 +6,15 @@
         "use": "@vercel/node"
       },
       {
-        "src": "index.html",
+        "src": "public/index.html",
         "use": "@vercel/static"
       },
       {
-        "src": "script.js",
+        "src": "public/script.js",
         "use": "@vercel/static"
       },
       {
-        "src": "styles.css",
+        "src": "public/styles.css",
         "use": "@vercel/static"
       }
     ],
@@ -25,7 +25,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "index.html"
+        "dest": "public/index.html"
       }
     ]
   }

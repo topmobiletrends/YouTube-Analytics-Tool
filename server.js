@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Root route (optional)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Proxy endpoint for YouTube search
