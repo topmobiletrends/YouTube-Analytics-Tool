@@ -23,11 +23,14 @@ const rpmRates = {
 // Fetch channel data
 async function fetchChannelData(query) {
   try {
-    // Step 1: Search for the channel using the backend server
+    console.log("Fetching data for query:", query); // Log the query
     const searchResponse = await fetch(`${SEARCH_API}?q=${query}`);
+    console.log("Search API Response Status:", searchResponse.status); // Log the status
+
     if (!searchResponse.ok) {
       throw new Error(`HTTP error! Status: ${searchResponse.status}`);
     }
+
     const searchData = await searchResponse.json();
     console.log("Search API Response:", searchData); // Log the search response
 
@@ -45,9 +48,12 @@ async function fetchChannelData(query) {
 
     // Step 2: Get channel details using the backend server
     const channelResponse = await fetch(`${CHANNEL_API}?id=${channelId}`);
+    console.log("Channel API Response Status:", channelResponse.status); // Log the status
+
     if (!channelResponse.ok) {
       throw new Error(`HTTP error! Status: ${channelResponse.status}`);
     }
+
     const channelData = await channelResponse.json();
     console.log("Channel API Response:", channelData); // Log the channel response
 
