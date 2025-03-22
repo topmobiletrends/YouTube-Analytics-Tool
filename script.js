@@ -1,8 +1,7 @@
-// API endpoints (pointing to your backend server on Vercel)
-const SEARCH_API = "https://you-tube-analytics-tool.vercel.app/api/search";
-const CHANNEL_API = "https://you-tube-analytics-tool.vercel.app/api/channel";
+const API_KEY = "AIzaSyBjP7TNoMxHrYnAW65TwvIsUc1GwSaP66g";
+const SEARCH_API = "https://www.googleapis.com/youtube/v3/search";
+const CHANNEL_API = "https://www.googleapis.com/youtube/v3/channels";
 
-// DOM elements
 const channelInput = document.getElementById("channelInput");
 const searchButton = document.getElementById("searchButton");
 const analyticsGrid = document.getElementById("analyticsGrid");
@@ -23,61 +22,27 @@ const rpmRates = {
 // Fetch channel data
 async function fetchChannelData(query) {
   try {
-    console.log("Fetching data for query:", query); // Log the query
-    const searchResponse = await fetch(`${SEARCH_API}?q=${encodeURIComponent(query)}`);
-    console.log("Search API Response Status:", searchResponse.status); // Log the status
-
-    if (!searchResponse.ok) {
-      throw new Error(`HTTP error! Status: ${searchResponse.status}`);
-    }
-
+    // Step 1: Search for the channel
+    const searchResponse = await fetch(
+      `${SEARCH_API}?part=snippet&q=${query}&type=channel&key=${API_KEY}`
+    );
     const searchData = await searchResponse.json();
-    console.log("Search API Response:", searchData); // Log the search response
-
-    // Check if the search results are valid
-    if (searchData.error) {
-      throw new Error(searchData.error.details || searchData.error);
-    }
-
-    if (!searchData.items || searchData.items.length === 0) {
-      throw new Error('No channels found');
-    }
-
-    // Use the first channel in the search results
     const channelId = searchData.items[0].id.channelId;
 
-    // Step 2: Get channel details using the backend server
-    const channelResponse = await fetch(`${CHANNEL_API}?id=${encodeURIComponent(channelId)}`);
-    console.log("Channel API Response Status:", channelResponse.status); // Log the status
-
-    if (!channelResponse.ok) {
-      throw new Error(`HTTP error! Status: ${channelResponse.status}`);
-    }
-
+    // Step 2: Get channel details
+    const channelResponse = await fetch(
+      `${CHANNEL_API}?part=snippet,statistics,status,brandingSettings&id=${channelId}&key=${API_KEY}`
+    );
     const channelData = await channelResponse.json();
-    console.log("Channel API Response:", channelData); // Log the channel response
-
-    // Check if the channel data is valid
-    if (channelData.error) {
-      throw new Error(channelData.error.details || channelData.error);
-    }
-
-    if (!channelData.items || channelData.items.length === 0) {
-      throw new Error('Channel details not found');
-    }
-
     return channelData.items[0];
   } catch (error) {
     console.error("Error fetching data:", error);
-    alert(error.message); // Show an error message to the user
     return null;
   }
 }
 
 // Display analytics
 function displayAnalytics(data) {
-  console.log("Data received for display:", data); // Log the data received
-
   const snippet = data.snippet;
   const statistics = data.statistics;
   const brandingSettings = data.brandingSettings;
