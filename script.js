@@ -1,6 +1,6 @@
-// API endpoints (pointing to your backend server)
-const SEARCH_API = "http://localhost:3000/api/search"; // Backend search endpoint
-const CHANNEL_API = "http://localhost:3000/api/channel"; // Backend channel endpoint
+// API endpoints (pointing to your backend server on Vercel)
+const SEARCH_API = "/api/search"; // Use relative path for Vercel deployment
+const CHANNEL_API = "/api/channel"; // Use relative path for Vercel deployment
 
 // DOM elements
 const channelInput = document.getElementById("channelInput");
