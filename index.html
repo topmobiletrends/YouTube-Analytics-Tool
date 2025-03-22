@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Analytics Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">Convertpixels-BLADE</div>
+    <nav>
+      <a href="#">TikTok</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="banner">
+      <h1>YouTube Analytics</h1>
+      <p>Get detailed insights into any YouTube channel.</p>
+      <div class="search-box">
+        <input type="text" id="channelInput" placeholder="Enter YouTube Channel Name or URL">
+        <button id="searchButton">See Analytics</button>
+      </div>
+    </section>
+
+    <section class="analytics">
+      <h2>Channel Analytics</h2>
+      <div class="grid-container" id="analyticsGrid"></div>
+    </section>
+
+    <section class="charts">
+      <h2>Data Visualization</h2>
+      <div class="grid-container">
+        <canvas id="subscriberChart"></canvas>
+        <canvas id="videoChart"></canvas>
+        <canvas id="viewsChart"></canvas>
+        <canvas id="revenueChart"></canvas>
+        <canvas id="engagementChart"></canvas>
+        <canvas id="demographicsChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#">Terms of Service</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact</a>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
