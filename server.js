@@ -17,6 +17,8 @@ app.get('/', (req, res) => {
 // Proxy endpoint for YouTube search
 app.get('/api/search', async (req, res) => {
   const query = req.query.q; // Get search query from the front end
+  console.log("Received query:", query); // Log the query
+
   const apiKey = process.env.API_KEY; // Access the API key from .env
 
   // Validate the query
@@ -26,10 +28,9 @@ app.get('/api/search', async (req, res) => {
 
   // Construct the YouTube API URL
   const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=channel&key=${apiKey}`;
+  console.log("YouTube API URL:", searchUrl); // Log the YouTube API URL
 
   try {
-    console.log('Fetching data from YouTube API:', searchUrl); // Log the URL being requested
-
     const response = await fetch(searchUrl);
 
     // Check if the response is OK
@@ -58,6 +59,8 @@ app.get('/api/search', async (req, res) => {
 // Proxy endpoint for YouTube channel details
 app.get('/api/channel', async (req, res) => {
   const channelId = req.query.id; // Get channel ID from the front end
+  console.log("Received channel ID:", channelId); // Log the channel ID
+
   const apiKey = process.env.API_KEY; // Access the API key from .env
 
   // Validate the channel ID
@@ -67,10 +70,9 @@ app.get('/api/channel', async (req, res) => {
 
   // Construct the YouTube API URL
   const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,status,brandingSettings&id=${encodeURIComponent(channelId)}&key=${apiKey}`;
+  console.log("YouTube API URL:", channelUrl); // Log the YouTube API URL
 
   try {
-    console.log('Fetching channel details from YouTube API:', channelUrl); // Log the URL being requested
-
     const response = await fetch(channelUrl);
 
     // Check if the response is OK

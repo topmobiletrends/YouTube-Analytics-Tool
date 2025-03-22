@@ -1,6 +1,6 @@
 // API endpoints (pointing to your backend server on Vercel)
-const SEARCH_API = "/api/search"; // Use relative path for Vercel deployment
-const CHANNEL_API = "/api/channel"; // Use relative path for Vercel deployment
+const SEARCH_API = "https://you-tube-analytics-tool.vercel.app/api/search";
+const CHANNEL_API = "https://you-tube-analytics-tool.vercel.app/api/channel";
 
 // DOM elements
 const channelInput = document.getElementById("channelInput");
