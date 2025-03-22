@@ -1,6 +1,6 @@
 // API endpoints (pointing to your backend server on Vercel)
-const SEARCH_API = "https://you-tube-analytics-tool-cav83nbt3-basharat-alis-projects.vercel.app/api/search";
-const CHANNEL_API = "https://you-tube-analytics-tool-cav83nbt3-basharat-alis-projects.vercel.app/api/channel";
+const SEARCH_API = "/api/search"; // Use relative path for Vercel deployment
+const CHANNEL_API = "/api/channel"; // Use relative path for Vercel deployment
 
 // DOM elements
 const channelInput = document.getElementById("channelInput");
@@ -24,7 +24,7 @@ const rpmRates = {
 async function fetchChannelData(query) {
   try {
     console.log("Fetching data for query:", query); // Log the query
-    const searchResponse = await fetch(`${SEARCH_API}?q=${query}`);
+    const searchResponse = await fetch(`${SEARCH_API}?q=${encodeURIComponent(query)}`);
     console.log("Search API Response Status:", searchResponse.status); // Log the status
 
     if (!searchResponse.ok) {
@@ -47,7 +47,7 @@ async function fetchChannelData(query) {
     const channelId = searchData.items[0].id.channelId;
 
     // Step 2: Get channel details using the backend server
-    const channelResponse = await fetch(`${CHANNEL_API}?id=${channelId}`);
+    const channelResponse = await fetch(`${CHANNEL_API}?id=${encodeURIComponent(channelId)}`);
     console.log("Channel API Response Status:", channelResponse.status); // Log the status
 
     if (!channelResponse.ok) {

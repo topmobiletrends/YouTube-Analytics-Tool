@@ -25,7 +25,7 @@ app.get('/api/search', async (req, res) => {
   }
 
   // Construct the YouTube API URL
-  const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=channel&key=${apiKey}`;
+  const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=channel&key=${apiKey}`;
 
   try {
     console.log('Fetching data from YouTube API:', searchUrl); // Log the URL being requested
@@ -66,7 +66,7 @@ app.get('/api/channel', async (req, res) => {
   }
 
   // Construct the YouTube API URL
-  const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,status,brandingSettings&id=${channelId}&key=${apiKey}`;
+  const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,status,brandingSettings&id=${encodeURIComponent(channelId)}&key=${apiKey}`;
 
   try {
     console.log('Fetching channel details from YouTube API:', channelUrl); // Log the URL being requested
