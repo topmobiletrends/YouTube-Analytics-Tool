@@ -1,4 +1,4 @@
-require('dotenv').config(); // Load environment variables
+require('dotenv').config(); // Load environment variables from .env
 const express = require('express');
 const fetch = require('node-fetch').default; // Import node-fetch correctly
 const cors = require('cors'); // Import the cors package
@@ -18,12 +18,17 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Validate API Key
+const apiKey = process.env.API_KEY; // Access the API key from .env
+if (!apiKey) {
+  console.error('ERROR: API_KEY is missing from .env file.');
+  process.exit(1); // Exit the application if the API key is missing
+}
+
 // Proxy endpoint for YouTube search
 app.get('/api/search', async (req, res) => {
   const query = req.query.q; // Get search query from the front end
   console.log("Received query:", query); // Log the query
-
-  const apiKey = process.env.API_KEY; // Access the API key from .env
 
   // Validate the query
   if (!query) {
@@ -64,8 +69,6 @@ app.get('/api/search', async (req, res) => {
 app.get('/api/channel', async (req, res) => {
   const channelId = req.query.id; // Get channel ID from the front end
   console.log("Received channel ID:", channelId); // Log the channel ID
-
-  const apiKey = process.env.API_KEY; // Access the API key from .env
 
   // Validate the channel ID
   if (!channelId) {
